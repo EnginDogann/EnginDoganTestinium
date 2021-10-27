@@ -66,6 +66,8 @@ public class LcWaikikiPage extends AbstractClass{
     public void clickLoginButton(){
         clickFunction(loginButton);
         System.out.println("Login butonuna tıklandı");
+        //logger.info("engın");
+
     }
 
     public void checkTitle(){
