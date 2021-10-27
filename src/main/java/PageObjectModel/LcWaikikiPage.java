@@ -142,6 +142,7 @@ public class LcWaikikiPage extends AbstractClass{
 
     public void checkProductPrice() throws InterruptedException{
 
+
         String myPrice = "89,99 TL";
         Assertion(basketProductPrice,myPrice);
         System.out.println("Urun fiyati sepetteki ile aynidir");
