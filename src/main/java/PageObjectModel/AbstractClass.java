@@ -1,10 +1,11 @@
 package PageObjectModel;
 
+import cucumber.api.java.Before;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.junit.After;
 import org.testng.annotations.BeforeClass;
-import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,7 @@ public abstract class AbstractClass {
 
     public Logger logger;
 
-    @BeforeClass
+    @Before
     public void setup() {
 
         logger = Logger.getLogger("Waas API");//added Logger
@@ -72,18 +73,18 @@ public abstract class AbstractClass {
 
     }
 
-    public void AssertionPrice(WebElement actual,WebElement expected){
-
-        //wait.until(ExpectedConditions.visibilityOf(actual));
-        Assert.assertEquals(actual.getText(),expected.getText());
-        System.out.println("Ürün Fiyatı = "+actual.getText()+" ve "+expected.getText()+" Aynıdır.");
-    }
 
     public String scroll() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,5000)");
         Thread.sleep(1000);
         return null;
+    }
+
+    @After
+    public void bitis() throws InterruptedException {
+        Thread.sleep(5000);
+        driver.quit();
     }
 
 

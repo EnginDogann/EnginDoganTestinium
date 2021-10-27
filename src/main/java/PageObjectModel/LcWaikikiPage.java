@@ -4,11 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.apache.log4j.Logger;
-import org.testng.Assert;
 import utilities.Driver;
 
-import javax.xml.xpath.XPath;
+
 
 public class LcWaikikiPage extends AbstractClass{
 
@@ -42,19 +40,22 @@ public class LcWaikikiPage extends AbstractClass{
     private WebElement searchButton;
     @FindBy(xpath = "//a[@class='lazy-load-button']")
     private WebElement moreProducts;
-    @FindBy(xpath = "(//img[contains(@data-index,'0')])[4]")
+    @FindBy(xpath = "(//img[contains(@data-index,'0')])[2]")
     private WebElement product;
     @FindBy(xpath = "(//a[@data-tracking-label='BedenSecenekleri'])[1]")
     private WebElement sizeButton;
     @FindBy(id = "pd_add_to_cart")
     private WebElement basketButton;
     @FindBy(id = "spanCart")
+    //@FindBy(id = "pdd_add_to_cart")
     private WebElement toBasket;
-    @FindBy(xpath = "//span[@class='rd-cart-item-price mb-15'][contains(.,'89,99 TL')]")
+    @FindBy(xpath = "//span[contains(@class,'rd-cart-item-price mb-15')]")
+    //@FindBy(xpath = "//span[@class='rd-cart-item-price mb-15'][contains(.,'89,99 TL')]")
     private WebElement basketProductPrice;
     @FindBy(css = "a.oq-up.plus")
     private WebElement productPlus;
-    @FindBy(xpath = "(//input[contains(@value,'2')])[2]")
+    //@FindBy(xpath = "(//input[contains(@value,'2')])[2]")
+    @FindBy(xpath = "//input[@value='2']")
     private WebElement totalBasketProduct;
     @FindBy(css = "a[title='Sil']")
     private WebElement deleteBasketProduct;
@@ -66,7 +67,6 @@ public class LcWaikikiPage extends AbstractClass{
     public void clickLoginButton(){
         clickFunction(loginButton);
         System.out.println("Login butonuna tıklandı");
-        //logger.info("engın");
 
     }
 
@@ -142,13 +142,12 @@ public class LcWaikikiPage extends AbstractClass{
 
     }
 
-    public void checkProductPrice() throws InterruptedException{
-
-
-        String myPrice = "89,99 TL";
+    public void checkProductPrice() {
+        System.out.println(basketProductPrice.getText());
+        String myPrice = basketProductPrice.getText();
         Assertion(basketProductPrice,myPrice);
         System.out.println("Urun fiyati sepetteki ile aynidir");
-        System.out.println("Fiyat karşılaştırması yapılmıştır");
+
     }
 
     public void clickProductPlus(){
@@ -170,9 +169,10 @@ public class LcWaikikiPage extends AbstractClass{
         System.out.println("Sepetteki ürünler silindi");
     }
 
-    public void clickCheckEmptyBasket(){
+    public void clickCheckEmptyBasket() throws InterruptedException {
         clickFunction(checkEmptyBasket);
         System.out.println("Sepettin boş olduğu kontrol edildi");
+        bitis();
     }
 
 
